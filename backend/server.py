@@ -71,7 +71,7 @@ def addItem(user_id):
                 for x in file_content:
                     list1.append(x)
 
-            data=[]
+            
 
             for x in range(len(list1)):
 
@@ -85,11 +85,10 @@ def addItem(user_id):
                         "price":list1[x]["price"]
                     }
                     
-                    data.append(dict1)
-                else:
-                    data.append(list1[x])
+                    list1[x]=dict1
+                
 
-            headers=data[0].keys()
+            headers=list1[0].keys()
 
             
 
@@ -97,11 +96,74 @@ def addItem(user_id):
                 csv_write=csv.DictWriter(file_handler,fieldnames=headers)
 
                 csv_write.writeheader()
-                csv_write.writerows(data)
+                csv_write.writerows(list1)
 
 
             return json.dumps({
                 "message":"Item added Successfully"
             })
 
+
+@app.route("/stock/reduce/<user_id>",methods=["GET","POST"])
+def reduceItem(user_id):
+    if request.method == "GET":
+        data=""
+
+        with open("data/info.csv","r") as file_handler:
+            file_content=csv.DictReader(file_handler)
+
+            for x in file_content:
+                if x["stock_id"] == user_id:
+                    data=x
+                    break
+                    
+        return json.dumps({
+            "data":data
+        })
+    
+    else:
+        if request.method == "POST":
+            remove=request.json["remove"]
+            time=request.json["time"]
+
+
+            list1=[]
+
+            diff={}
+
+            with open("data/info.csv","r") as file_handler:
+                file_content = csv.DictReader(file_handler)
+                for x in file_content:
+                    list1.append(x)
+
+            for x in range(len(list1)):
+
+                if list1[x]["stock_id"] == user_id:
+                    quantity = int(list1[x]["quantity"]) - int(remove)
+
+                    dict1={
+                        "stock_id":list1[x]["stock_id"],
+                        "quantity":quantity,
+                        "item":list1[x]["item"],
+                        "price":list1[x]["price"]
+                    }
+                    
+                    list1[x]=dict1
+                
+
+            headers=list1[0].keys()
+
+            
+
+            with open("data/info.csv","w") as file_handler:
+                csv_write=csv.DictWriter(file_handler,fieldnames=headers)
+
+                csv_write.writeheader()
+                csv_write.writerows(list1)
+
+
+            return json.dumps({
+                "message":"Item reduced Successfully"
+            })
+            
 

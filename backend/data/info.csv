@@ -1,5 +1,5 @@
-stock_id,quantity,item,price
-1,10,rice,80
-2,8,moong,50
-3,8,chaana,100
-4,10,biscuits,20
+stock_id,quantity,item,price,unit
+1,14,rice,80,kg
+2,8,moong,50,kg
+3,8,chaana,100,kg
+4,10,biscuits,20,packet
