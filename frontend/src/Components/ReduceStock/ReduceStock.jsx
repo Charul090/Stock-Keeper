@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom"
 import axios from "axios"
 import StockPage from '../StockPage/StockPage'
 
-export default function AddStock() {
+export default function ReduceStock() {
 
     let { id } = useParams()
 
@@ -29,7 +29,9 @@ export default function AddStock() {
     }, [update])
 
     const handleAdd = (e) => {
-        setQuantity(quantity + 1)
+        if(quantity < data.quantity){
+            setQuantity(quantity + 1)
+        }
     }
 
     const handleReduce = (e) => {
@@ -46,7 +48,7 @@ export default function AddStock() {
         let time = date.toLocaleString()
 
         let info = {
-            add: quantity,
+            remove: quantity,
             time
         }
 
@@ -54,7 +56,7 @@ export default function AddStock() {
 
         axios({
             method: "post",
-            url: `http://127.0.0.1:5000/stock/add/${id}`,
+            url: `http://127.0.0.1:5000/stock/reduce/${id}`,
             data: info,
             headers: {
                 "Content-type": "application/json; charset=utf-8"
@@ -80,7 +82,7 @@ export default function AddStock() {
     }
 
     return (
-        <StockPage operation="added" data={data} reqstatus={reqstatus} message={message}
+        <StockPage operation="reduced" data={data} reqstatus={reqstatus} message={message}
             quantity={quantity} handleAdd={handleAdd} handleReduce={handleReduce}
             handleBack={handleBack} handleSubmit={handleSubmit}/>
     )

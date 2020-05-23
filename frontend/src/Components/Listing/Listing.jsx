@@ -37,7 +37,7 @@ export default function Listing() {
     const handleDeduct = (e) => {
         let page_id = e.target.parentNode.parentNode.id
 
-        console.log(page_id,)
+        history.push(`/item/reduce/${page_id}`)
 
     }
 

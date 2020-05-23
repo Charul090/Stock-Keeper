@@ -1,13 +1,13 @@
 stock_id,quantity,item,price,unit
-1,22,rice,80,kg
+1,16,rice,80,kg
 2,8,moong,50,kg
-3,11,chaana,100,kg
+3,13,chaana,100,kg
 4,6,biscuit,20,packet
 5,9,muffins,50,packet
 6,9,bread,40,packet
-7,18,rice,80,kg
+7,10,rice,80,kg
 8,12,moong,50,kg
 9,8,chaana,100,kg
 10,6,biscuits,20,packet
 11,6,muffins,50,packet
-12,6,bread,40,packet
+12,20,bread,40,packet
