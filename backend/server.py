@@ -196,4 +196,18 @@ def reduceItem(user_id):
                 "message":"Item reduced Successfully"
             })
             
+@app.route("/stock/history",methods=["GET"])
+def sendHistoryInfo():
+    list1=[]
+
+    with open("data/history.csv","r") as file_handler:
+        file_content=csv.DictReader(file_handler)
+
+        for x in file_content:
+            dict1={}
+            for key,val in x.items():
+                dict1[key]=val
+            list1.append(dict1)
+    
+    return json.dumps({"data":list1})
 
