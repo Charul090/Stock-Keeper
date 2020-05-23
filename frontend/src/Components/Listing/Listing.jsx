@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {useHistory} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Container, Row, Col, Button, Table, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Table, Form ,Spinner} from 'react-bootstrap';
 import { Info_Fetch } from "../../Redux/stock_info/action.js"
 import { v1 as uuid } from "uuid"
 import Page from "../Page/Page.jsx"
+import {AiOutlineDelete} from "react-icons/ai"
 
 export default function Listing() {
 
@@ -47,6 +48,26 @@ export default function Listing() {
         setPerPage(val)
     }
 
+    const handleDelete=(e)=>{
+        let val;
+
+        if(e.target.nodeName === "path"){
+            val = e.target.parentNode.parentNode.parentNode.parentNode.id
+            
+        }
+
+        if(e.target.nodeName === "BUTTON"){
+            val=e.target.parentNode.parentNode.id
+        }
+
+        if (e.target.nodeName === "svg"){
+            val=e.target.parentNode.parentNode.parentNode.id
+        }
+        
+        
+        
+    }
+
 
     if (data !== undefined) {
         return (
@@ -66,7 +87,7 @@ export default function Listing() {
                         </Col>
                     </Row>
                     <Row className="justify-content-md-center">
-                        <Col xs={12} md={10}>
+                        <Col xs={12}>
                             <Table className="text-center" responsive="sm" striped bordered hover>
                                 <thead>
                                     <tr>
@@ -74,7 +95,7 @@ export default function Listing() {
                                         <th>ITEM</th>
                                         <th>QUANTITY</th>
                                         <th>PRICE</th>
-                                        <th colSpan="2">ACTIONS</th>
+                                        <th colSpan="3">ACTIONS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,6 +115,11 @@ export default function Listing() {
                                                     <td>
                                                         <Button onClick={handleDeduct} variant="warning" size="sm">
                                                             Deduct Stock 
+                                                        </Button>
+                                                    </td>
+                                                    <td>
+                                                        <Button onClick={handleDelete} variant="dark" size="sm">
+                                                            <AiOutlineDelete/>
                                                         </Button>
                                                     </td>
                                                 </tr>
@@ -116,7 +142,9 @@ export default function Listing() {
     else {
         return (
             <main>
-
+                <div className="d-flex justify-content-center">
+                    <Spinner animation="grow" variant="primary" />
+                </div>
             </main>
         )
     }

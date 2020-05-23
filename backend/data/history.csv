@@ -13,3 +13,4 @@ stock_id,item,quantity,operation,time
 1,rice,10,reduce,"24/05/2020, 00:17:10"
 3,chaana,2,add,"24/05/2020, 00:17:25"
 7,rice,8,reduce,"24/05/2020, 00:20:43"
+12,bread,N/A,delete,"24/05/2020, 00:20:43"

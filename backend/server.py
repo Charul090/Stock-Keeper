@@ -41,8 +41,8 @@ def sendInfo():
     })
 
 
-@app.route("/stock/add/<user_id>",methods=["GET","POST"])
-def addItem(user_id):
+@app.route("/stock/add/<stock_id>",methods=["GET","POST"])
+def addItem(stock_id):
     if request.method == "GET":
         data=""
 
@@ -50,7 +50,7 @@ def addItem(user_id):
             file_content=csv.DictReader(file_handler)
 
             for x in file_content:
-                if x["stock_id"] == user_id:
+                if x["stock_id"] == stock_id:
                     data=x
                     break
                     
@@ -75,11 +75,11 @@ def addItem(user_id):
 
             for x in range(len(list1)):
 
-                if list1[x]["stock_id"] == user_id:
+                if list1[x]["stock_id"] == stock_id:
                     quantity = int(list1[x]["quantity"])+int(add)
 
                     diff={
-                        "stock_id":user_id,
+                        "stock_id":stock_id,
                         "item":list1[x]["item"],
                         "quantity":add,
                         "operation":"add",
@@ -119,8 +119,8 @@ def addItem(user_id):
             })
 
 
-@app.route("/stock/reduce/<user_id>",methods=["GET","POST"])
-def reduceItem(user_id):
+@app.route("/stock/reduce/<stock_id>",methods=["GET","POST"])
+def reduceItem(stock_id):
     if request.method == "GET":
         data=""
 
@@ -128,7 +128,7 @@ def reduceItem(user_id):
             file_content=csv.DictReader(file_handler)
 
             for x in file_content:
-                if x["stock_id"] == user_id:
+                if x["stock_id"] == stock_id:
                     data=x
                     break
                     
@@ -153,11 +153,11 @@ def reduceItem(user_id):
 
             for x in range(len(list1)):
 
-                if list1[x]["stock_id"] == user_id:
+                if list1[x]["stock_id"] == stock_id:
                     quantity = int(list1[x]["quantity"]) - int(remove)
 
                     diff={
-                        "stock_id":user_id,
+                        "stock_id":stock_id,
                         "item":list1[x]["item"],
                         "quantity":remove,
                         "operation":"reduce",
@@ -210,4 +210,45 @@ def sendHistoryInfo():
             list1.append(dict1)
     
     return json.dumps({"data":list1})
+
+@app.route("/stock/delete",methods=["POST"])
+def deleteItem():
+    stock_id=str(request.json["stock_id"])
+    time=request.json["time"]
+
+    diff={}
+
+    diff["stock_id"] = stock_id
+    
+
+    list1=[]
+    with open("data/info.csv","r") as file_handler:
+        file_content=csv.DictReader(file_handler)
+
+        for x in file_content:
+            if x["stock_id"] == stock_id:
+                
+                diff["item"]=x["item"]
+                diff["quantity"]="N/A"
+                diff["operation"]="delete"
+                diff["time"]=time
+
+                continue
+            else:
+                list1.append(x)
+    
+    headers1=list1[0].keys()
+    headers2=diff.keys()
+
+    with open("data/history.csv","a") as file_handler:
+        csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
+        csv_write.writerow(diff)
+
+    with open("data/info.csv","w") as file_handler:
+        csv_write=csv.DictWriter(file_handler,fieldnames=headers1)
+
+        csv_write.writeheader()
+        csv_write.writerows(list1)
+    
+    return json.dumps({"message":"Item Deleted Successfully"})
 
