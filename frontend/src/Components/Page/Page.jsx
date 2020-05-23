@@ -34,20 +34,20 @@ export default function Page({ page, per_page }) {
 
     for (let i = start; i <= end; i++) {
         if (i === start) {
-            page_elements.push(<Pagination.Prev disabled={page === 1} onClick={handleClick}></Pagination.Prev>)
+            page_elements.push(<Pagination.Prev disabled={page === 1} onClick={handleClick} key={`${i}-x`}></Pagination.Prev>)
             continue
         }
 
         if (i === end) {
             page_elements.push(
-                <Pagination.Next disabled={ page === total_pages} onClick={handleClick}></Pagination.Next>
+                <Pagination.Next key={`${i}-x`} disabled={ page === total_pages} onClick={handleClick}></Pagination.Next>
             )
             continue
         }
 
         if (i > 0 && i <= total_pages) {
             page_elements.push(
-                <Pagination.Item active={page === i} onClick={handleClick}>{i}</Pagination.Item>
+                <Pagination.Item key={`${i}-x`} active={page === i} onClick={handleClick}>{i}</Pagination.Item>
             )
         }
     }

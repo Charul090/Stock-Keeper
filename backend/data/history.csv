@@ -1,4 +1,9 @@
 stock_id,item,quantity,operation,time
-1,rice,4,add,10 pm
-1,rice,4,reduce,10 pm
-4,biscuits,4,reduce,10 pm
+12,bread,3,add,"23/05/2020, 23:31:53"
+1,rice,2,add,"23/05/2020, 23:34:16"
+1,rice,2,add,"23/05/2020, 23:40:11"
+6,bread,3,add,"23/05/2020, 23:40:21"
+6,bread,3,add,"23/05/2020, 23:41:40"
+5,muffins,3,add,"23/05/2020, 23:43:40"
+3,chaana,3,add,"23/05/2020, 23:44:05"
+8,moong,4,add,"23/05/2020, 23:44:37"

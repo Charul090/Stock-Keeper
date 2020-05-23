@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import {useHistory} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Container, Row, Col, Button, Table , Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Table, Form } from 'react-bootstrap';
 import { Info_Fetch } from "../../Redux/stock_info/action.js"
 import { v1 as uuid } from "uuid"
 import Page from "../Page/Page.jsx"
@@ -8,6 +9,8 @@ import Page from "../Page/Page.jsx"
 export default function Listing() {
 
     let dispatch = useDispatch()
+
+    let history = useHistory()
 
     let { info, page } = useSelector((state) => state)
 
@@ -20,19 +23,26 @@ export default function Listing() {
 
     }, [])
 
-    useEffect(()=>{
-        dispatch(Info_Fetch(1,per_page))
-    },[per_page])
+    useEffect(() => {
+        dispatch(Info_Fetch(1, per_page))
+    }, [per_page])
 
-    const handleEdit = (e) => {
+    const handleAdd = (e) => {
         let page_id = e.target.parentNode.parentNode.id
 
-        console.log(page_id)
+        history.push(`/item/add/${page_id}`)
 
     }
 
-    const handleChange=(e)=>{
-        let val=e.target.value
+    const handleDeduct = (e) => {
+        let page_id = e.target.parentNode.parentNode.id
+
+        console.log(page_id,)
+
+    }
+
+    const handleChange = (e) => {
+        let val = e.target.value
 
         setPerPage(val)
     }
@@ -57,14 +67,14 @@ export default function Listing() {
                     </Row>
                     <Row className="justify-content-md-center">
                         <Col xs={12} md={10}>
-                            <Table responsive="sm" striped bordered hover>
+                            <Table className="text-center" responsive="sm" striped bordered hover>
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>ITEM</th>
                                         <th>QUANTITY</th>
                                         <th>PRICE</th>
-                                        <th>ACTIONS</th>
+                                        <th colSpan="2">ACTIONS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +86,16 @@ export default function Listing() {
                                                     <td>{elem.item.toUpperCase()}</td>
                                                     <td>{`${elem.quantity} ${elem.unit}`}</td>
                                                     <td>₹{elem.price}</td>
-                                                    <td><Button onClick={handleEdit} variant="success" size="sm">CHANGE</Button></td>
+                                                    <td>
+                                                        <Button onClick={handleAdd} variant="success" size="sm">
+                                                            Add Stock
+                                                        </Button>
+                                                    </td>
+                                                    <td>
+                                                        <Button onClick={handleDeduct} variant="warning" size="sm">
+                                                            Deduct Stock 
+                                                        </Button>
+                                                    </td>
                                                 </tr>
                                             )
                                         })
@@ -87,7 +106,7 @@ export default function Listing() {
                     </Row>
                     <Row className="justify-content-md-center">
                         <Col xs={12} md={10} lg={6}>
-                            <Page page={page} per_page={per_page}/>
+                            <Page page={page} per_page={per_page} />
                         </Col>
                     </Row>
                 </Container>
