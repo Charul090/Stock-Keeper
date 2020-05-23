@@ -78,22 +78,37 @@ def addItem(user_id):
                 if list1[x]["stock_id"] == user_id:
                     quantity = int(list1[x]["quantity"])+int(add)
 
+                    diff={
+                        "stock_id":user_id,
+                        "item":list1[x]["item"],
+                        "quantity":add,
+                        "operation":"add",
+                        "time":time
+                    }
+
                     dict1={
                         "stock_id":list1[x]["stock_id"],
                         "quantity":quantity,
                         "item":list1[x]["item"],
-                        "price":list1[x]["price"]
+                        "price":list1[x]["price"],
+                        "unit":list1[x]["unit"]
                     }
                     
                     list1[x]=dict1
                 
 
-            headers=list1[0].keys()
+            headers1=list1[0].keys()
 
+            headers2 = diff.keys()
+
+            
+            with open("data/history.csv","a") as file_handler:
+                csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
+                csv_write.writerow(diff)
             
 
             with open("data/info.csv","w") as file_handler:
-                csv_write=csv.DictWriter(file_handler,fieldnames=headers)
+                csv_write=csv.DictWriter(file_handler,fieldnames=headers1)
 
                 csv_write.writeheader()
                 csv_write.writerows(list1)
@@ -141,22 +156,37 @@ def reduceItem(user_id):
                 if list1[x]["stock_id"] == user_id:
                     quantity = int(list1[x]["quantity"]) - int(remove)
 
+                    diff={
+                        "stock_id":user_id,
+                        "item":list1[x]["item"],
+                        "quantity":remove,
+                        "operation":"reduce",
+                        "time":time
+                    }
+
                     dict1={
                         "stock_id":list1[x]["stock_id"],
                         "quantity":quantity,
                         "item":list1[x]["item"],
-                        "price":list1[x]["price"]
+                        "price":list1[x]["price"],
+                        "unit":list1[x]["unit"]
                     }
                     
                     list1[x]=dict1
                 
 
-            headers=list1[0].keys()
+            headers1=list1[0].keys()
+
+            headers2=diff.keys()
+
+            with open("data/history.csv","a") as file_handler:
+                csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
+                csv_write.writerow(diff)
 
             
 
             with open("data/info.csv","w") as file_handler:
-                csv_write=csv.DictWriter(file_handler,fieldnames=headers)
+                csv_write=csv.DictWriter(file_handler,fieldnames=headers1)
 
                 csv_write.writeheader()
                 csv_write.writerows(list1)

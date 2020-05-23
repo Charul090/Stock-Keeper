@@ -1,1 +1,4 @@
-stock_id,item,quantity,time
+stock_id,item,quantity,operation,time
+1,rice,4,add,10 pm
+1,rice,4,reduce,10 pm
+4,biscuits,4,reduce,10 pm
