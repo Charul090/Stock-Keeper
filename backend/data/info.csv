@@ -1,5 +1,5 @@
-id,item,quantity,price
-1,rice,4,80
-2,moong,4,50
-3,chaana,8,100
-4,biscuits,10,20
+stock_id,quantity,item,price
+1,10,rice,80
+2,8,moong,50
+3,8,chaana,100
+4,10,biscuits,20
