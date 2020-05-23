@@ -71,7 +71,7 @@ export default function ReduceStock() {
                 setTimeout(()=>{
                     setMessage("")
                     setReqStatus(false)
-                },6000)
+                },3000)
             })
             .catch((err) => console.log(err))
 

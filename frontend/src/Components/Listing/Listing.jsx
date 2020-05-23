@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Container, Row, Col, Button, Table, Form ,Spinner} from 'react-bootstrap';
+import { Container, Row, Col, Button, Table, Form, Spinner } from 'react-bootstrap';
 import { Info_Fetch } from "../../Redux/stock_info/action.js"
 import { v1 as uuid } from "uuid"
 import Page from "../Page/Page.jsx"
-import {AiOutlineDelete} from "react-icons/ai"
+import { AiOutlineDelete } from "react-icons/ai"
+import axios from 'axios';
 
 export default function Listing() {
 
@@ -16,6 +17,7 @@ export default function Listing() {
     let { info, page } = useSelector((state) => state)
 
     const [per_page, setPerPage] = useState(10)
+    const [message, setMessage] = useState("")
     let { data } = info
 
     useEffect(() => {
@@ -48,24 +50,43 @@ export default function Listing() {
         setPerPage(val)
     }
 
-    const handleDelete=(e)=>{
+    const handleDelete = (e) => {
         let val;
 
-        if(e.target.nodeName === "path"){
+        if (e.target.nodeName === "path") {
             val = e.target.parentNode.parentNode.parentNode.parentNode.id
-            
+
         }
 
-        if(e.target.nodeName === "BUTTON"){
-            val=e.target.parentNode.parentNode.id
+        if (e.target.nodeName === "BUTTON") {
+            val = e.target.parentNode.parentNode.id
         }
 
-        if (e.target.nodeName === "svg"){
-            val=e.target.parentNode.parentNode.parentNode.id
+        if (e.target.nodeName === "svg") {
+            val = e.target.parentNode.parentNode.parentNode.id
         }
-        
-        
-        
+
+        axios({
+            method: "post",
+            url: "http://127.0.0.1:5000/stock/delete",
+            data: {
+                stock_id: val,
+                time: new Date().toLocaleString()
+            },
+            headers: {
+                "Content-type": "application/json; charset=utf-8"
+            }
+        })
+            .then((res) => res.data)
+            .then((data) => {
+                dispatch(Info_Fetch(page, per_page))
+                setMessage(data.message)
+                setTimeout(() => {
+                    setMessage("")
+                }, 3000)
+            })
+            .catch((err) => console.log(err))
+
     }
 
 
@@ -88,6 +109,7 @@ export default function Listing() {
                     </Row>
                     <Row className="justify-content-md-center">
                         <Col xs={12}>
+                            <p className="text-danger">{message === "" ? null : message}</p>
                             <Table className="text-center" responsive="sm" striped bordered hover>
                                 <thead>
                                     <tr>
@@ -114,12 +136,12 @@ export default function Listing() {
                                                     </td>
                                                     <td>
                                                         <Button onClick={handleDeduct} variant="warning" size="sm">
-                                                            Deduct Stock 
+                                                            Deduct Stock
                                                         </Button>
                                                     </td>
                                                     <td>
                                                         <Button onClick={handleDelete} variant="dark" size="sm">
-                                                            <AiOutlineDelete/>
+                                                            <AiOutlineDelete />
                                                         </Button>
                                                     </td>
                                                 </tr>

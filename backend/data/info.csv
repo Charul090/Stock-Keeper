@@ -10,3 +10,4 @@ stock_id,quantity,item,price,unit
 9,8,chaana,100,kg
 10,6,biscuits,20,packet
 11,6,muffins,50,packet
+12,20,bread,40,packet
