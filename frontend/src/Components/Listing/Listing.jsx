@@ -87,7 +87,7 @@ export default function Listing() {
                     </Row>
                     <Row className="justify-content-md-center">
                         <Col xs={12} md={10} lg={6}>
-                            <Page page={page}/>
+                            <Page page={page} per_page={per_page}/>
                         </Col>
                     </Row>
                 </Container>
