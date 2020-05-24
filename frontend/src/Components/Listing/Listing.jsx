@@ -15,7 +15,9 @@ export default function Listing() {
 
     let history = useHistory()
 
-    let { info, page } = useSelector((state) => state)
+    let { info, page } = useSelector((state) => state.items)
+
+    let total_pages = useSelector(state => state.items.info.total_pages)
 
     const [per_page, setPerPage] = useState(10)
     const [message, setMessage] = useState("")
@@ -94,7 +96,7 @@ export default function Listing() {
     if (data !== undefined) {
         return (
             <main>
-                <Container fluid="sm">
+                <Container fluid="md">
                     <InfoCards low_stock={low_stock} zero_stock={zero_stock}/>
                     <Row className="mt-3">
                         <Col xs={12} md={2} sm={3} className="offset-xs-0 offset-sm-9 offset-md-10">
@@ -156,7 +158,7 @@ export default function Listing() {
                     </Row>
                     <Row className="justify-content-md-center">
                         <Col xs={12} md={10} lg={6}>
-                            <Page page={page} per_page={per_page} />
+                            <Page total_pages={total_pages} method={Info_Fetch} page={page} per_page={per_page} />
                         </Col>
                     </Row>
                 </Container>

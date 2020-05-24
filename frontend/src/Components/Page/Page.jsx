@@ -1,11 +1,8 @@
 import React from 'react'
 import { Container, Pagination } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux"
-import { Info_Fetch } from "../../Redux/stock_info/action.js"
 
-export default function Page({ page, per_page }) {
-
-    let total_pages = useSelector(state => state.info.total_pages)
+export default function Page({ page, per_page,method,total_pages }) {
 
     let dispatch = useDispatch()
 
@@ -16,18 +13,16 @@ export default function Page({ page, per_page }) {
 
     const handleClick=(e)=>{
         let val=e.target.firstChild.textContent
-        
-        console.log()
 
         if(val === "\u203A" && page < total_pages){
-            dispatch(Info_Fetch(page+1,per_page))
+            dispatch(method(page+1,per_page))
         }
         else if(val === "\u2039" && page > 1){
-            dispatch(Info_Fetch(page-1,per_page))
+            dispatch(method(page-1,per_page))
         }
         else{
             if(Number(val) !== page){
-                dispatch(Info_Fetch(Number(val),per_page))
+                dispatch(method(Number(val),per_page))
             }
         }
     }

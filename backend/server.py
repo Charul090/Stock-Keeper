@@ -210,6 +210,10 @@ def reduceItem(stock_id):
             
 @app.route("/stock/history",methods=["GET"])
 def sendHistoryInfo():
+    page = request.args.get("page",default=1,type=int)
+
+    per_page = request.args.get("per_page",default=10,type=int)
+
     list1=[]
 
     with open("data/history.csv","r") as file_handler:
@@ -221,7 +225,20 @@ def sendHistoryInfo():
                 dict1[key]=val
             list1.append(dict1)
     
-    return json.dumps({"data":list1})
+    total_pages = math.ceil(len(list1)/per_page)
+
+    list1=list1[::-1]
+
+    start = (page - 1) * per_page
+    end = page * per_page
+
+    list1=list1[start:end]
+    
+    return json.dumps({
+        "total_pages":total_pages,
+        "current_page":page,
+        "data":list1
+        })
 
 @app.route("/stock/delete",methods=["POST"])
 def deleteItem():
