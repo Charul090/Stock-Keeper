@@ -7,6 +7,7 @@ import { v1 as uuid } from "uuid"
 import Page from "../Page/Page.jsx"
 import { AiOutlineDelete } from "react-icons/ai"
 import axios from 'axios';
+import InfoCards from '../InfoCards/InfoCards.jsx';
 
 export default function Listing() {
 
@@ -18,7 +19,7 @@ export default function Listing() {
 
     const [per_page, setPerPage] = useState(10)
     const [message, setMessage] = useState("")
-    let { data } = info
+    let { data ,zero_stock ,low_stock } = info
 
     useEffect(() => {
 
@@ -94,8 +95,9 @@ export default function Listing() {
         return (
             <main>
                 <Container fluid="sm">
-                    <Row className="mt-5">
-                        <Col xs={12} sm={3} className="offset-xs-0 offset-sm-8">
+                    <InfoCards low_stock={low_stock} zero_stock={zero_stock}/>
+                    <Row className="mt-3">
+                        <Col xs={12} md={2} sm={3} className="offset-xs-0 offset-sm-9 offset-md-10">
                             <Form.Group>
                                 <Form.Label>Per Page</Form.Label>
                                 <Form.Control as="select" value={per_page} onChange={handleChange}>

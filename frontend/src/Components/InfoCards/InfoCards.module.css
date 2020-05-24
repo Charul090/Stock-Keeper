@@ -1,0 +1,45 @@
+.icon1{
+    font-size: 33px;
+    fill:#9C27B0;
+}
+
+.icon2{
+    font-size: 33px;
+    fill:#FFB300;
+}
+
+.icon3{
+    font-size: 33px;
+    fill:red;
+}
+
+.icon4{
+    font-size: 33px;
+    fill:green;
+}
+
+.card{
+    padding-top: 10px;
+    height:150px;
+}
+
+.heading a {
+    color:inherit;
+}
+
+.heading a:hover{
+    text-decoration: none;
+    color:#039BE5;
+}
+
+@media screen and (max-width:1024px) and (min-width:768px){
+    .heading{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:425px){
+    .card{
+        height:120px;
+    }
+}

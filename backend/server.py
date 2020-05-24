@@ -18,12 +18,22 @@ def sendInfo():
 
     list1=[]
 
+    zero=0
+    low=0
+
+
     with open("data/info.csv","r") as file_handler:
         file_content = csv.DictReader(file_handler)
         
         for x in file_content:
             dict1={}
             for key,val in x.items():
+                if key == "quantity" and int(val) == 0:
+                    zero+=1
+
+                if key == "quantity" and int(val) <= 6:
+                    low+=1
+
                 dict1[key]=val
             list1.append(dict1)
     
@@ -35,6 +45,8 @@ def sendInfo():
     data=list1[start:end]
 
     return json.dumps({
+        "zero_stock":zero,
+        "low_stock":low,
         "total_pages":total_pages,
         "current_page":page,
         "data":data
