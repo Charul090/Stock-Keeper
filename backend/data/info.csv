@@ -11,3 +11,4 @@ stock_id,quantity,item,price,unit
 10,0,biscuits,20,packet
 11,6,muffins,50,packet
 12,20,bread,40,packet
+13,2,Maggi,24,packet

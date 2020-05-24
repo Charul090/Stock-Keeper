@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Jumbotron, Spinner, Row, Col, Card, Button, Form } from 'react-bootstrap'
+import { Container, Spinner, Row, Col, Card, Button, Form } from 'react-bootstrap'
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr"
 import styles from "./StockPage.module.css"
 
@@ -8,7 +8,7 @@ export default function StockPage({operation,data,reqstatus,message,handleAdd,ha
     if (data !== "") {
         return (
             <Container fluid="sm">
-                <Jumbotron className="mt-5 p-3 p-md-5" fluid>
+                <div className="mt-5 p-3 p-md-5" fluid>
                     <p className="text-danger">{reqstatus && message !== "" ? message:null}</p>
                     <Row>
                         <Col md={4} className="mb-3 mb-md-0">
@@ -83,7 +83,7 @@ export default function StockPage({operation,data,reqstatus,message,handleAdd,ha
                             </Card>
                         </Col>
                     </Row>
-                </Jumbotron>
+                </div>
             </Container>
         )
     }

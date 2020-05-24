@@ -281,3 +281,39 @@ def deleteItem():
     
     return json.dumps({"message":"Item Deleted Successfully"})
 
+@app.route("/additem",methods=["POST"])
+def addNewItem():
+    name = request.json["name"]
+    quantity = request.json["quantity"]
+    unit = request.json["unit"]
+    price = request.json["price"]
+
+    list1=[]
+
+    with open("data/info.csv","r") as file_handler:
+        file_content=csv.DictReader(file_handler)
+
+        for x in file_content:
+            list1.append(x)
+    
+    stock_id = int(list1[-1]["stock_id"])+1
+
+    dict1={
+        "stock_id":stock_id,
+        "quantity":quantity,
+        "item":name,
+        "price":price,
+        "unit":unit
+    }
+
+    list1.append(dict1)
+
+    headers = list1[0].keys()
+
+    with open("data/info.csv","w") as file_handler:
+        csv_write = csv.DictWriter(file_handler,fieldnames=headers)
+
+        csv_write.writeheader()
+        csv_write.writerows(list1)
+
+    return json.dumps({"message":"New Item Added Successfully"})

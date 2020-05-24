@@ -4,6 +4,7 @@ import Listing from '../Components/Listing/Listing'
 import AddStock from "../Components/AddStock/AddStock.jsx"
 import ReduceStock from '../Components/ReduceStock/ReduceStock'
 import HistoryListing from '../Components/HistoryListing/HistoryListing'
+import AddItem from '../Components/AddItem/AddItem'
 
 export default function Routes() {
     return (
@@ -12,6 +13,7 @@ export default function Routes() {
             <Route path="/item/add/:id"  component={AddStock} />
             <Route path="/item/reduce/:id"  component={ReduceStock} />
             <Route path="/history" component={HistoryListing} />
+            <Route path="/newitem" component={AddItem} />
         </Switch>
     )
 }
