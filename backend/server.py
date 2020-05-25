@@ -287,6 +287,7 @@ def addNewItem():
     quantity = request.json["quantity"]
     unit = request.json["unit"]
     price = request.json["price"]
+    time = request.json["time"]
 
     list1=[]
 
@@ -306,9 +307,22 @@ def addNewItem():
         "unit":unit
     }
 
+    dict2={
+        "stock_id":stock_id,
+        "item":name,
+        "quantity":quantity,
+        "operation":"add",
+        "time":time
+    }
+
     list1.append(dict1)
 
     headers = list1[0].keys()
+    headers2 = dict2.keys()
+
+    with open("data/history.csv","a") as file_handler:
+        csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
+        csv_write.writerow(dict2)
 
     with open("data/info.csv","w") as file_handler:
         csv_write = csv.DictWriter(file_handler,fieldnames=headers)

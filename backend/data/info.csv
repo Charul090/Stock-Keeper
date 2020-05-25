@@ -1,6 +1,5 @@
 stock_id,quantity,item,price,unit
-1,11,rice,80,kg
-2,0,moong,50,kg
+2,4,moong,50,kg
 3,4,chaana,100,kg
 4,6,biscuit,20,packet
 5,9,muffins,50,packet
@@ -12,3 +11,4 @@ stock_id,quantity,item,price,unit
 12,20,bread,40,packet
 14,22,Maggi,20,packet
 15,16,Chana,90,kg
+16,24,maggi,240,packet

@@ -26,7 +26,8 @@ export default function AddItem() {
                 name,
                 unit,
                 quantity,
-                price
+                price,
+                time:new Date().toLocaleString()
             }
 
             obj = JSON.stringify(obj)

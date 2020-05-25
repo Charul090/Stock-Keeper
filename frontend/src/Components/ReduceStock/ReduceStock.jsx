@@ -44,6 +44,7 @@ export default function ReduceStock() {
         let date = new Date()
 
         setUpdate(false)
+        setMessage("")
 
         let time = date.toLocaleString()
 
@@ -68,10 +69,6 @@ export default function ReduceStock() {
                 setReqStatus(true)
                 setQuantity(0)
                 setUpdate(true)
-                setTimeout(()=>{
-                    setMessage("")
-                    setReqStatus(false)
-                },3000)
             })
             .catch((err) => console.log(err))
 

@@ -8,7 +8,7 @@ export default function StockPage({operation,data,reqstatus,message,handleAdd,ha
     if (data !== "") {
         return (
             <Container fluid="sm">
-                <div className="mt-5 p-3 p-md-5" fluid>
+                <div className="mt-5 p-3 p-md-5" >
                     <p className="text-danger">{reqstatus && message !== "" ? message:null}</p>
                     <Row>
                         <Col md={4} className="mb-3 mb-md-0">

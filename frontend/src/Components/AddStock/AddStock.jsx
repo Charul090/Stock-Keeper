@@ -16,6 +16,8 @@ export default function AddStock() {
     const [reqstatus, setReqStatus] = useState(false)
     const [message, setMessage] = useState("")
 
+    let time_out;
+
     useEffect(() => {
         if (update) {
             axios({
@@ -41,6 +43,7 @@ export default function AddStock() {
     const handleSubmit = () => {
         let date = new Date()
 
+        setMessage("")
         setUpdate(false)
 
         let time = date.toLocaleString()
@@ -65,11 +68,7 @@ export default function AddStock() {
                 setMessage(data.message)
                 setReqStatus(true)
                 setQuantity(0)
-                setUpdate(true)
-                setTimeout(()=>{
-                    setMessage("")
-                    setReqStatus(false)
-                },3000)
+                setUpdate(true)                
             })
             .catch((err) => console.log(err))
 
