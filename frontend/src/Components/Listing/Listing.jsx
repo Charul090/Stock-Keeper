@@ -131,7 +131,7 @@ export default function Listing() {
                                                 <tr id={elem.stock_id} key={uuid()}>
                                                     <td>{elem.stock_id}</td>
                                                     <td>{elem.item.toUpperCase()}</td>
-                                                    <td>{`${elem.quantity} ${elem.unit}`}</td>
+                                                    <td className={elem.quantity > 0?null:"text-danger" }>{`${elem.quantity} ${elem.unit}`}</td>
                                                     <td>₹{elem.price}</td>
                                                     <td>
                                                         <Button onClick={handleAdd} variant="success" size="sm">
