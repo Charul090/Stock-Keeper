@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table ,Spinner} from 'react-bootstrap'
 import { useSelector } from "react-redux"
+import {v1 as uuid} from "uuid"
 
 export default function HistoryTable() {
 
@@ -22,7 +23,7 @@ export default function HistoryTable() {
                     {
                         data.map((elem) => {
                             return (
-                                <tr>
+                                <tr key={uuid()}>
                                     <td>{elem.stock_id}</td>
                                     <td>{elem.item.toUpperCase()}</td>
                                     <td>{elem.operation}</td>

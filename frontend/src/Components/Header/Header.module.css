@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+
+    border-bottom: 1px solid #ECEFF1;
+}
+
+.logo{
+    display: flex;
+}
+
+.logo > h3{
+    font-family: 'Chelsea Market', cursive;
+    line-height: 1.9;
+}
+
+.icon{
+    fill:#01579B;
+    font-size: 42px;
+}
+
+.container2{
+    display: flex;
+    align-items: center;
+}
+
+.icon2{
+    font-size: 18px;
+    cursor:pointer;
+}
