@@ -71,7 +71,7 @@ export default function Listing() {
 
         axios({
             method: "post",
-            url: "http://127.0.0.1:5000/stock/delete",
+            url: "http://stock-backend.charul.co/stock/delete",
             data: {
                 stock_id: val,
                 time: new Date().toLocaleString()

@@ -22,7 +22,7 @@ export default function AddStock() {
         if (update) {
             axios({
                 method: "get",
-                url: `http://127.0.0.1:5000/stock/add/${id}`
+                url: `http://stock-backend.charul.co/stock/add/${id}`
             })
                 .then((res) => res.data)
                 .then((data) => setData(data.data))
@@ -57,7 +57,7 @@ export default function AddStock() {
 
         axios({
             method: "post",
-            url: `http://127.0.0.1:5000/stock/add/${id}`,
+            url: `http://stock-backend.charul.co/stock/add/${id}`,
             data: info,
             headers: {
                 "Content-type": "application/json; charset=utf-8"

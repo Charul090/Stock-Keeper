@@ -34,7 +34,7 @@ export default function AddItem() {
 
             axios({
                 method: "post",
-                url: "http://127.0.0.1:5000/additem",
+                url: "http://stock-backend.charul.co/additem",
                 data: obj,
                 headers: {
                     "Content-type": "application/json; charset=utf-8"

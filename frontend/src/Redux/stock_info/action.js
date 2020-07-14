@@ -32,7 +32,7 @@ const Info_Fetch=(page,per_page)=>{
         dispatch(Send_Query())
         axios({
             method:"get",
-            url:"http://127.0.0.1:5000/stock/listing",
+            url:"http://stock-backend.charul.co/stock/listing",
             params:{
                 page:page,
                 per_page:per_page

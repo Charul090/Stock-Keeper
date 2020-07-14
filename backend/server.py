@@ -22,7 +22,7 @@ def sendInfo():
     low=0
 
 
-    with open("data/info.csv","r") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
         file_content = csv.DictReader(file_handler)
         
         for x in file_content:
@@ -58,7 +58,7 @@ def addItem(stock_id):
     if request.method == "GET":
         data=""
 
-        with open("data/info.csv","r") as file_handler:
+        with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
             file_content=csv.DictReader(file_handler)
 
             for x in file_content:
@@ -77,7 +77,7 @@ def addItem(stock_id):
             list1 = []
             diff = {}
 
-            with open("data/info.csv","r") as file_handler:
+            with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
                 file_content=csv.DictReader(file_handler)
 
                 for x in file_content:
@@ -114,12 +114,12 @@ def addItem(stock_id):
             headers2 = diff.keys()
 
             
-            with open("data/history.csv","a") as file_handler:
+            with open("/home/ubuntu/stock-keeper/backend/data/history.csv","a") as file_handler:
                 csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
                 csv_write.writerow(diff)
             
 
-            with open("data/info.csv","w") as file_handler:
+            with open("/home/ubuntu/stock-keeper/backend/data/info.csv","w") as file_handler:
                 csv_write=csv.DictWriter(file_handler,fieldnames=headers1)
 
                 csv_write.writeheader()
@@ -136,7 +136,7 @@ def reduceItem(stock_id):
     if request.method == "GET":
         data=""
 
-        with open("data/info.csv","r") as file_handler:
+        with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
             file_content=csv.DictReader(file_handler)
 
             for x in file_content:
@@ -158,7 +158,7 @@ def reduceItem(stock_id):
 
             diff={}
 
-            with open("data/info.csv","r") as file_handler:
+            with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
                 file_content = csv.DictReader(file_handler)
                 for x in file_content:
                     list1.append(x)
@@ -191,13 +191,13 @@ def reduceItem(stock_id):
 
             headers2=diff.keys()
 
-            with open("data/history.csv","a") as file_handler:
+            with open("/home/ubuntu/stock-keeper/backend/data/history.csv","a") as file_handler:
                 csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
                 csv_write.writerow(diff)
 
             
 
-            with open("data/info.csv","w") as file_handler:
+            with open("/home/ubuntu/stock-keeper/backend/data/info.csv","w") as file_handler:
                 csv_write=csv.DictWriter(file_handler,fieldnames=headers1)
 
                 csv_write.writeheader()
@@ -216,7 +216,7 @@ def sendHistoryInfo():
 
     list1=[]
 
-    with open("data/history.csv","r") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/history.csv","r") as file_handler:
         file_content=csv.DictReader(file_handler)
 
         for x in file_content:
@@ -251,7 +251,7 @@ def deleteItem():
     
 
     list1=[]
-    with open("data/info.csv","r") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
         file_content=csv.DictReader(file_handler)
 
         for x in file_content:
@@ -269,11 +269,11 @@ def deleteItem():
     headers1=list1[0].keys()
     headers2=diff.keys()
 
-    with open("data/history.csv","a") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/history.csv","a") as file_handler:
         csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
         csv_write.writerow(diff)
 
-    with open("data/info.csv","w") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/info.csv","w") as file_handler:
         csv_write=csv.DictWriter(file_handler,fieldnames=headers1)
 
         csv_write.writeheader()
@@ -291,7 +291,7 @@ def addNewItem():
 
     list1=[]
 
-    with open("data/info.csv","r") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/info.csv","r") as file_handler:
         file_content=csv.DictReader(file_handler)
 
         for x in file_content:
@@ -320,11 +320,11 @@ def addNewItem():
     headers = list1[0].keys()
     headers2 = dict2.keys()
 
-    with open("data/history.csv","a") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/history.csv","a") as file_handler:
         csv_write=csv.DictWriter(file_handler,fieldnames=headers2)
         csv_write.writerow(dict2)
 
-    with open("data/info.csv","w") as file_handler:
+    with open("/home/ubuntu/stock-keeper/backend/data/info.csv","w") as file_handler:
         csv_write = csv.DictWriter(file_handler,fieldnames=headers)
 
         csv_write.writeheader()

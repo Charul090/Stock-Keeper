@@ -32,7 +32,7 @@ const History_Fetch=(page,per_page)=>{
         dispatch(Send_History_Query())
         return axios({
             method:"get",
-            url:"http://127.0.0.1:5000/stock/history",
+            url:"http://stock-backend.charul.co/stock/history",
             params:{
                 page:page,
                 per_page:per_page
